@@ -1,0 +1,267 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+CMD = '    cd /mnt && pwd &&     export PYTHONPATH=/usr/bin/python:/mnt &&     python -m torch.distributed.run     --nproc_per_node 8     --nnodes 1     --master_port 6000     tools/retro/main.py      --distributed-timeout-minutes 600     --tensor-model-parallel-size 1     --pipeline-model-parallel-size 1     --num-layers 24     --hidden-size 1024     --num-attention-heads 16     --micro-batch-size 1     --global-batch-size 256     --seq-length 512     --max-position-embeddings 512     --load /mnt/data/checkpoints/megatron_bert_345m_v0.1_uncased     --exit-on-missing-checkpoint     --no-load-optim     --no-load-rng     --data-path    1 /mnt/data/enwiki-latest-single-file/bert/my-bert_text_sentence      --tokenizer-type BertWordPieceLowerCase     --vocab-file /mnt/data/resources/bert-uncased-vocab.txt     --split 98,2,0     --distributed-backend nccl     --lr 0.0001     --lr-decay-style linear     --min-lr 1.0e-5     --train-samples 200000     --lr-decay-samples 175000     --lr-warmup-samples 10000     --weight-decay 1e-2     --clip-grad 1.0     --eval-interval 2000     --eval-iters 50     --fp16     --dataloader-type single     --no-data-sharding     --no-gradient-accumulation-fusion     --no-async-tensor-model-parallel-allreduce     --bert-embedder-type megatron     --output-bert-embeddings         --retro-workdir /mnt/data/retro-workdir     --retro-tasks db-build     --retro-return-doc-ids     --retro-bert-vocab-file /mnt/data/resources/bert-uncased-vocab.txt     --retro-bert-tokenizer-type BertWordPieceLowerCase     --retro-gpt-seed 1234     --retro-gpt-tokenizer-type GPTSentencePieceTokenizer     --retro-gpt-tokenizer-model /mnt/data/checkpoints/megatron_lm_345m_v0.0     --retro-gpt-seq-length 512     --retro-gpt-chunk-length 64     --retro-gpt-global-batch-size 256     --retro-gpt-eval-interval 2000     --retro-gpt-eval-iters 50     --retro-gpt-split 98,2,0     --retro-gpt-data-path    1 /mnt/data/enwiki-latest-single-file/bert/my-bert_text_sentence      --retro-index-str OPQ32_64,IVF65536_HNSW8,PQ32     --retro-index-ntrain 1000000     --retro-index-train-load-fraction 0.97     --retro-index-add-load-fraction 0.95     --retro-index-no-delete-training-embeddings     --retro-index-no-delete-added-codes     --retro-query-num-neighbors-query 200     --retro-query-num-neighbors-save 20     --retro-query-ef-search 32     --retro-query-nprobe 4096  '.
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+/mnt
+WARNING:__main__:
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+Zarr-based strategies will not be registered because of missing packages
+/home/joseph.cornelius/.local/lib/python3.10/site-packages/transformers/utils/hub.py:124: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/home/joseph.cornelius/.local/lib/python3.10/site-packages/transformers/utils/hub.py:124: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/home/joseph.cornelius/.local/lib/python3.10/site-packages/transformers/utils/hub.py:124: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/home/joseph.cornelius/.local/lib/python3.10/site-packages/transformers/utils/hub.py:124: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/home/joseph.cornelius/.local/lib/python3.10/site-packages/transformers/utils/hub.py:124: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/home/joseph.cornelius/.local/lib/python3.10/site-packages/transformers/utils/hub.py:124: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/home/joseph.cornelius/.local/lib/python3.10/site-packages/transformers/utils/hub.py:124: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/home/joseph.cornelius/.local/lib/python3.10/site-packages/transformers/utils/hub.py:124: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+Traceback (most recent call last):
+  File "/mnt/tools/retro/main.py", line 17, in <module>
+Traceback (most recent call last):
+  File "/mnt/tools/retro/main.py", line 17, in <module>
+    from tools.retro.db import build_db
+  File "/mnt/tools/retro/db/__init__.py", line 3, in <module>
+    from tools.retro.db import build_db
+  File "/mnt/tools/retro/db/__init__.py", line 3, in <module>
+    from .build import build_db
+  File "/mnt/tools/retro/db/build.py", line 22, in <module>
+    from .build import build_db
+  File "/mnt/tools/retro/db/build.py", line 22, in <module>
+    from tools.bert_embedding.utils import get_missing_blocks_by_rank
+  File "/mnt/tools/bert_embedding/__init__.py", line 3, in <module>
+    from .embed import BertEmbedder, DiskDataParallelBertEmbedder
+  File "/mnt/tools/bert_embedding/embed.py", line 18, in <module>
+    from tools.bert_embedding.utils import get_missing_blocks_by_rank
+  File "/mnt/tools/bert_embedding/__init__.py", line 3, in <module>
+    from megatron.training import setup_model_and_optimizer
+  File "/mnt/megatron/training.py", line 39, in <module>
+    from .embed import BertEmbedder, DiskDataParallelBertEmbedder
+  File "/mnt/tools/bert_embedding/embed.py", line 18, in <module>
+    from megatron.training import setup_model_and_optimizer
+  File "/mnt/megatron/training.py", line 39, in <module>
+    from megatron.optimizer import get_megatron_optimizer
+  File "/mnt/megatron/optimizer/__init__.py", line 8, in <module>
+    from .distrib_optimizer import DistributedOptimizer
+  File "/mnt/megatron/optimizer/distrib_optimizer.py", line 16, in <module>
+    from megatron.optimizer import get_megatron_optimizer
+  File "/mnt/megatron/optimizer/__init__.py", line 8, in <module>
+    from .distrib_optimizer import DistributedOptimizer
+  File "/mnt/megatron/optimizer/distrib_optimizer.py", line 16, in <module>
+    from .optimizer import MixedPrecisionOptimizer, _zero_grad_group_helper
+  File "/mnt/megatron/optimizer/optimizer.py", line 8, in <module>
+Traceback (most recent call last):
+  File "/mnt/tools/retro/main.py", line 17, in <module>
+    from .optimizer import MixedPrecisionOptimizer, _zero_grad_group_helper
+  File "/mnt/megatron/optimizer/optimizer.py", line 8, in <module>
+    import amp_C
+ImportError: /usr/local/lib/python3.10/dist-packages/amp_C.cpython-310-x86_64-linux-gnu.so: undefined symbol: _ZN3c104impl3cow11cow_deleterEPv
+    from tools.retro.db import build_db
+  File "/mnt/tools/retro/db/__init__.py", line 3, in <module>
+    import amp_C
+ImportError: /usr/local/lib/python3.10/dist-packages/amp_C.cpython-310-x86_64-linux-gnu.so: undefined symbol: _ZN3c104impl3cow11cow_deleterEPv
+    from .build import build_db
+  File "/mnt/tools/retro/db/build.py", line 22, in <module>
+    from tools.bert_embedding.utils import get_missing_blocks_by_rank
+  File "/mnt/tools/bert_embedding/__init__.py", line 3, in <module>
+    from .embed import BertEmbedder, DiskDataParallelBertEmbedder
+  File "/mnt/tools/bert_embedding/embed.py", line 18, in <module>
+    from megatron.training import setup_model_and_optimizer
+  File "/mnt/megatron/training.py", line 39, in <module>
+    from megatron.optimizer import get_megatron_optimizer
+  File "/mnt/megatron/optimizer/__init__.py", line 8, in <module>
+    from .distrib_optimizer import DistributedOptimizer
+  File "/mnt/megatron/optimizer/distrib_optimizer.py", line 16, in <module>
+    from .optimizer import MixedPrecisionOptimizer, _zero_grad_group_helper
+  File "/mnt/megatron/optimizer/optimizer.py", line 8, in <module>
+    import amp_C
+ImportError: /usr/local/lib/python3.10/dist-packages/amp_C.cpython-310-x86_64-linux-gnu.so: undefined symbol: _ZN3c104impl3cow11cow_deleterEPv
+Traceback (most recent call last):
+  File "/mnt/tools/retro/main.py", line 17, in <module>
+    from tools.retro.db import build_db
+  File "/mnt/tools/retro/db/__init__.py", line 3, in <module>
+    from .build import build_db
+  File "/mnt/tools/retro/db/build.py", line 22, in <module>
+    from tools.bert_embedding.utils import get_missing_blocks_by_rank
+  File "/mnt/tools/bert_embedding/__init__.py", line 3, in <module>
+    from .embed import BertEmbedder, DiskDataParallelBertEmbedder
+  File "/mnt/tools/bert_embedding/embed.py", line 18, in <module>
+    from megatron.training import setup_model_and_optimizer
+  File "/mnt/megatron/training.py", line 39, in <module>
+    from megatron.optimizer import get_megatron_optimizer
+  File "/mnt/megatron/optimizer/__init__.py", line 8, in <module>
+    from .distrib_optimizer import DistributedOptimizer
+  File "/mnt/megatron/optimizer/distrib_optimizer.py", line 16, in <module>
+    from .optimizer import MixedPrecisionOptimizer, _zero_grad_group_helper
+  File "/mnt/megatron/optimizer/optimizer.py", line 8, in <module>
+    import amp_C
+ImportError: /usr/local/lib/python3.10/dist-packages/amp_C.cpython-310-x86_64-linux-gnu.so: undefined symbol: _ZN3c104impl3cow11cow_deleterEPv
+Traceback (most recent call last):
+  File "/mnt/tools/retro/main.py", line 17, in <module>
+    from tools.retro.db import build_db
+  File "/mnt/tools/retro/db/__init__.py", line 3, in <module>
+    from .build import build_db
+  File "/mnt/tools/retro/db/build.py", line 22, in <module>
+    from tools.bert_embedding.utils import get_missing_blocks_by_rank
+  File "/mnt/tools/bert_embedding/__init__.py", line 3, in <module>
+    from .embed import BertEmbedder, DiskDataParallelBertEmbedder
+  File "/mnt/tools/bert_embedding/embed.py", line 18, in <module>
+    from megatron.training import setup_model_and_optimizer
+  File "/mnt/megatron/training.py", line 39, in <module>
+    from megatron.optimizer import get_megatron_optimizer
+  File "/mnt/megatron/optimizer/__init__.py", line 8, in <module>
+    from .distrib_optimizer import DistributedOptimizer
+  File "/mnt/megatron/optimizer/distrib_optimizer.py", line 16, in <module>
+    from .optimizer import MixedPrecisionOptimizer, _zero_grad_group_helper
+  File "/mnt/megatron/optimizer/optimizer.py", line 8, in <module>
+    import amp_C
+ImportError: /usr/local/lib/python3.10/dist-packages/amp_C.cpython-310-x86_64-linux-gnu.so: undefined symbol: _ZN3c104impl3cow11cow_deleterEPv
+Traceback (most recent call last):
+  File "/mnt/tools/retro/main.py", line 17, in <module>
+    from tools.retro.db import build_db
+  File "/mnt/tools/retro/db/__init__.py", line 3, in <module>
+    from .build import build_db
+  File "/mnt/tools/retro/db/build.py", line 22, in <module>
+    from tools.bert_embedding.utils import get_missing_blocks_by_rank
+  File "/mnt/tools/bert_embedding/__init__.py", line 3, in <module>
+    from .embed import BertEmbedder, DiskDataParallelBertEmbedder
+  File "/mnt/tools/bert_embedding/embed.py", line 18, in <module>
+    from megatron.training import setup_model_and_optimizer
+  File "/mnt/megatron/training.py", line 39, in <module>
+    from megatron.optimizer import get_megatron_optimizer
+  File "/mnt/megatron/optimizer/__init__.py", line 8, in <module>
+    from .distrib_optimizer import DistributedOptimizer
+  File "/mnt/megatron/optimizer/distrib_optimizer.py", line 16, in <module>
+    from .optimizer import MixedPrecisionOptimizer, _zero_grad_group_helper
+  File "/mnt/megatron/optimizer/optimizer.py", line 8, in <module>
+    import amp_C
+ImportError: /usr/local/lib/python3.10/dist-packages/amp_C.cpython-310-x86_64-linux-gnu.so: undefined symbol: _ZN3c104impl3cow11cow_deleterEPv
+Traceback (most recent call last):
+  File "/mnt/tools/retro/main.py", line 17, in <module>
+    from tools.retro.db import build_db
+  File "/mnt/tools/retro/db/__init__.py", line 3, in <module>
+    from .build import build_db
+  File "/mnt/tools/retro/db/build.py", line 22, in <module>
+    from tools.bert_embedding.utils import get_missing_blocks_by_rank
+  File "/mnt/tools/bert_embedding/__init__.py", line 3, in <module>
+    from .embed import BertEmbedder, DiskDataParallelBertEmbedder
+  File "/mnt/tools/bert_embedding/embed.py", line 18, in <module>
+    from megatron.training import setup_model_and_optimizer
+  File "/mnt/megatron/training.py", line 39, in <module>
+    from megatron.optimizer import get_megatron_optimizer
+  File "/mnt/megatron/optimizer/__init__.py", line 8, in <module>
+    from .distrib_optimizer import DistributedOptimizer
+  File "/mnt/megatron/optimizer/distrib_optimizer.py", line 16, in <module>
+    from .optimizer import MixedPrecisionOptimizer, _zero_grad_group_helper
+  File "/mnt/megatron/optimizer/optimizer.py", line 8, in <module>
+    import amp_C
+ImportError: /usr/local/lib/python3.10/dist-packages/amp_C.cpython-310-x86_64-linux-gnu.so: undefined symbol: _ZN3c104impl3cow11cow_deleterEPv
+Traceback (most recent call last):
+  File "/mnt/tools/retro/main.py", line 17, in <module>
+    from tools.retro.db import build_db
+  File "/mnt/tools/retro/db/__init__.py", line 3, in <module>
+    from .build import build_db
+  File "/mnt/tools/retro/db/build.py", line 22, in <module>
+    from tools.bert_embedding.utils import get_missing_blocks_by_rank
+  File "/mnt/tools/bert_embedding/__init__.py", line 3, in <module>
+    from .embed import BertEmbedder, DiskDataParallelBertEmbedder
+  File "/mnt/tools/bert_embedding/embed.py", line 18, in <module>
+    from megatron.training import setup_model_and_optimizer
+  File "/mnt/megatron/training.py", line 39, in <module>
+    from megatron.optimizer import get_megatron_optimizer
+  File "/mnt/megatron/optimizer/__init__.py", line 8, in <module>
+    from .distrib_optimizer import DistributedOptimizer
+  File "/mnt/megatron/optimizer/distrib_optimizer.py", line 16, in <module>
+    from .optimizer import MixedPrecisionOptimizer, _zero_grad_group_helper
+  File "/mnt/megatron/optimizer/optimizer.py", line 8, in <module>
+    import amp_C
+ImportError: /usr/local/lib/python3.10/dist-packages/amp_C.cpython-310-x86_64-linux-gnu.so: undefined symbol: _ZN3c104impl3cow11cow_deleterEPv
+[2024-06-21 15:39:46,645] torch.distributed.elastic.multiprocessing.api: [ERROR] failed (exitcode: 1) local_rank: 0 (pid: 419903) of binary: /usr/bin/python
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/joseph.cornelius/.local/lib/python3.10/site-packages/torch/distributed/run.py", line 810, in <module>
+    main()
+  File "/home/joseph.cornelius/.local/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 346, in wrapper
+    return f(*args, **kwargs)
+  File "/home/joseph.cornelius/.local/lib/python3.10/site-packages/torch/distributed/run.py", line 806, in main
+    run(args)
+  File "/home/joseph.cornelius/.local/lib/python3.10/site-packages/torch/distributed/run.py", line 797, in run
+    elastic_launch(
+  File "/home/joseph.cornelius/.local/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 134, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/joseph.cornelius/.local/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 264, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+tools/retro/main.py FAILED
+------------------------------------------------------------
+Failures:
+[1]:
+  time      : 2024-06-21_15:39:46
+  host      : gnode04.cluster.hpc
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 419904)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[2]:
+  time      : 2024-06-21_15:39:46
+  host      : gnode04.cluster.hpc
+  rank      : 2 (local_rank: 2)
+  exitcode  : 1 (pid: 419905)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[3]:
+  time      : 2024-06-21_15:39:46
+  host      : gnode04.cluster.hpc
+  rank      : 3 (local_rank: 3)
+  exitcode  : 1 (pid: 419906)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[4]:
+  time      : 2024-06-21_15:39:46
+  host      : gnode04.cluster.hpc
+  rank      : 4 (local_rank: 4)
+  exitcode  : 1 (pid: 419907)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[5]:
+  time      : 2024-06-21_15:39:46
+  host      : gnode04.cluster.hpc
+  rank      : 5 (local_rank: 5)
+  exitcode  : 1 (pid: 419908)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[6]:
+  time      : 2024-06-21_15:39:46
+  host      : gnode04.cluster.hpc
+  rank      : 6 (local_rank: 6)
+  exitcode  : 1 (pid: 419909)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[7]:
+  time      : 2024-06-21_15:39:46
+  host      : gnode04.cluster.hpc
+  rank      : 7 (local_rank: 7)
+  exitcode  : 1 (pid: 419910)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2024-06-21_15:39:46
+  host      : gnode04.cluster.hpc
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 419903)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

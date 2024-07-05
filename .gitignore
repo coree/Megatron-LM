@@ -7,3 +7,7 @@ build
 slurm*
 logs
 .vscode
+data/
+flash-attention/
+.cache/
+apex/
