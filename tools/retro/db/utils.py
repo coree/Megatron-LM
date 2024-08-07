@@ -85,18 +85,43 @@ def get_individual_doc_offsets(ds_id, ds_info):
     # *Note*: convert to dataset, rather than copying to memory.
     doc_offsets = np.zeros((ds_info["n_docs"], 3), dtype="uint64")
     doc_offsets[:, 0] = ds_id
+
+    # Added by JC >>>
+    print(f"DEBUG: Shape of doc_offsets: {doc_offsets.shape}")
+    # <<< Added by JC
+
     start_idx = 0
     start_offset = 0
     for path in paths:
+        # Added by JC >>>
+        print(f"DEBUG: Loading {path}")
+        # <<< Added by JC
+
         with h5py.File(path) as f:
             current_doc_offsets = np.copy(f["doc_offsets"])
             current_doc_offsets[:, 1] += start_offset
+            
+            # Added by JC >>>
+            print(f"DEBUG: Shape of current_doc_offsets: {current_doc_offsets.shape}")
+            # <<< Added by JC
+            
             current_ndocs = current_doc_offsets.shape[0]
+            
+            # Added by JC >>>
+            # Continue if misamatch
+            if doc_offsets[start_idx:(start_idx+current_ndocs), 1:].shape != current_doc_offsets.shape:
+                print(f"WARNING: Skipping {path} due to shape mismatch")
+                continue
+            # <<< Added by JC
+            
             doc_offsets[start_idx:(start_idx+current_ndocs), 1:] = \
                 current_doc_offsets
             start_idx += current_ndocs
             start_offset = current_doc_offsets[-1, 1].item()
-
+            
+            # Added by JC >>>
+            print(f"DEBUG: Shape of doc_offsets: {doc_offsets.shape}")
+            # <<< Added by JC
     return doc_offsets
 
 

@@ -11,3 +11,9 @@ data/
 flash-attention/
 .cache/
 apex/
+.out
+logs/
+.data
+data
+core_nid*
+data.lock

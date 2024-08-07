@@ -377,11 +377,19 @@ def merge_dbs(indexed_dataset_infos, db_type):
     if db_type == "valid":
         n_chunks = sum(m["n_chunks"] - m["n_chunks_train"]
                        for m in indexed_dataset_infos)
+        # Added by JC >>>
+        print(f"DEBUG: n_chunks: {n_chunks}")
+        # <<< Added by JC
+
     else:
         n_chunks = sum(m[n_chunks_key] for m in indexed_dataset_infos)
         n_docs = None if n_docs_key is None else \
             sum(m[n_docs_key] for m in indexed_dataset_infos)
-
+        # Added by JC >>>
+        print(f"DEBUG: n_chunks: {n_chunks}")
+        print(f"DEBUG: n_docs: {n_docs}")
+        # <<< Added by JC
+        
     # DB path.
     db_path = get_merged_db_path_map()[db_type]
 
@@ -426,6 +434,11 @@ def merge_dbs(indexed_dataset_infos, db_type):
         doc_start_index = 0
         doc_start_offset = 0
         for ds_idx, ds_info in enumerate(indexed_dataset_infos):
+            # Added by JC >>>
+            print(f"DEBUG: ds_idx: {ds_idx}")
+            print(f"DEBUG: ds_info: {ds_info}")
+            # <<< Added by JC
+
             print(" > merging dbs; '%s', dataset %d / %d ... '%s'." %
                   (db_type, ds_idx, len(indexed_dataset_infos), ds_info["name"]))
             individual_chunk_db = get_individual_chunk_db(ds_idx, ds_info)

@@ -1,7 +1,7 @@
 # Set the directory containing the wiki files
-WIKI_DIR="/home/joseph.cornelius/projects/Megatron-LM/data/enwiki-latest-pages-articles"
+WIKI_DIR="/users/jcorneli/workspace/Megatron-LM/data/enwiki-latest-pages-articles"
 # Set the output directory where the consolidated file will be saved
-OUTDIR="/home/joseph.cornelius/projects/Megatron-LM/data/enwiki-latest-single-file"
+OUTDIR="/users/jcorneli/workspace/Megatron-LM/data/enwiki-latest-single-file"
 
 # Create the output directory if it does not exist
 mkdir -p $OUTDIR
